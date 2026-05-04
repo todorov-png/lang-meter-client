@@ -64,21 +64,12 @@
 
     methods: {
       sortArrayQuestions(questions) {
-        const questionsLength = questions.length;
-        const allСycles = questionsLength < 20 ? questionsLength : 20;
-        const arrayIndex = [];
-        const arrayQuestions = [];
-
-        for (let i = 0; i < questionsLength; i++) {
-          arrayIndex.push(i);
+        const shuffled = [...questions];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-        for (let i = 0; i < allСycles; i++) {
-          arrayIndex.splice(Math.random() * questionsLength, 1)[0];
-        }
-        for (let i = 0; i < allСycles; i++) {
-          arrayQuestions.push(questions[arrayIndex[i]]);
-        }
-        return arrayQuestions;
+        return shuffled.slice(0, 20);
       },
 
       async checkAnswers() {
